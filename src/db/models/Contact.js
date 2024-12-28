@@ -32,4 +32,15 @@ const ContactSchema = new Schema(
   },
 );
 
+export const sortByList = Object.keys(ContactSchema.paths);
+export const contactTypeList = ['work', 'home', 'personal'];
+// export const sortByList = [
+//   'name',
+//   'phoneNumber',
+//   'email',
+//   'isFavourite',
+//   'contactType',
+//   '_id',
+// ];
+
 export const ContactCollection = model('contact', ContactSchema);

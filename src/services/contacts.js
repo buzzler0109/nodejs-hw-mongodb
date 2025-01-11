@@ -44,7 +44,7 @@ export const getAllContacts = async ({
   };
 };
 
-export const getContactById = (filter) => ContactCollection.findById(filter);
+export const getContactById = (filter) => ContactCollection.findOne(filter);
 
 export const addContact = (data) => ContactCollection.create(data);
 

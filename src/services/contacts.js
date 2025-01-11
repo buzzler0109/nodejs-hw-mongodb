@@ -19,6 +19,9 @@ export const getAllContacts = async ({
   if (filter.isFavourite) {
     contactQuery.where('isFavourite').eq(filter.isFavourite);
   }
+  if (filter.userId) {
+    contactQuery.where('userId').eq(filter.userId);
+  }
 
   const data = await contactQuery
     .skip(skip)
@@ -41,8 +44,7 @@ export const getAllContacts = async ({
   };
 };
 
-export const getContactById = (contactId) =>
-  ContactCollection.findById(contactId);
+export const getContactById = (filter) => ContactCollection.findById(filter);
 
 export const addContact = (data) => ContactCollection.create(data);
 
@@ -58,5 +60,5 @@ export const updateContact = async (contactId, data, options = {}) => {
   return result;
 };
 
-export const deleteContact = (contactId) =>
-  ContactCollection.findOneAndDelete(contactId);
+export const deleteContact = (filter) =>
+  ContactCollection.findOneAndDelete(filter);

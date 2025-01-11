@@ -5,6 +5,7 @@ import { validateBody } from '../utils/validateBody.js';
 
 import {
   loginUserController,
+  logoutUserController,
   refreshUsersSessionController,
   registerUserController,
 } from '../controllers/auth.js';
@@ -25,5 +26,7 @@ usersRouter.post(
 );
 
 usersRouter.post('/refresh', ctrlWrapper(refreshUsersSessionController));
+
+usersRouter.post('/logout', ctrlWrapper(logoutUserController));
 
 export default usersRouter;

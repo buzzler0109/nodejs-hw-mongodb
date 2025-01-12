@@ -32,9 +32,9 @@ export const setupServer = () => {
     });
   });
 
-  app.use('/contacts', contactsRouter);
-
   app.use('/auth', usersRouter);
+
+  app.use('/contacts', contactsRouter);
 
   app.use('*', notFoundHandler);
 

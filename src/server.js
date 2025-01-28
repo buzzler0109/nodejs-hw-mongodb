@@ -24,5 +24,6 @@ export const setupServer = () => {
   app.use('/uploads', express.static(UPLOAD_DIR));
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+    console.log(process.env.JWT_SECRET);
   });
 };

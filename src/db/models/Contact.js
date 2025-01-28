@@ -1,35 +1,43 @@
 import { model, Schema } from 'mongoose';
+import { emailRegexp } from '../../constants/index.js';
 
-const ContactSchema = new Schema(
+const contactSchema = new Schema(
   {
     name: {
       type: String,
       required: true,
     },
     phoneNumber: {
-      type: Number,
+      type: String,
       required: true,
     },
     email: {
       type: String,
-      required: false,
+      match: emailRegexp,
     },
     isFavourite: {
       type: Boolean,
-      required: true,
       default: false,
     },
     contactType: {
       type: String,
+      enum: ['personal', 'home', 'work'],
       required: true,
-      enum: ['work', 'home', 'personal'],
       default: 'personal',
     },
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'users',
+    },
+    photo: { type: String },
   },
   {
     timestamps: true,
+    createdAt: Date.now,
+    updatedAt: Date.now,
     versionKey: false,
   },
 );
 
-export const ContactCollection = model('contact', ContactSchema);
+export const ContactCollection = model('contact', contactSchema);

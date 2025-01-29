@@ -21,6 +21,9 @@ export const setupServer = () => {
   app.use(logger);
   app.use(router);
   app.use('/uploads', express.static(UPLOAD_DIR));
+  app.get('/debug/env', (req, res) => {
+    res.json({ JWT_SECRET: process.env.JWT_SECRET || 'Не загружено' });
+  });
 
   swaggerDocs(app);
 

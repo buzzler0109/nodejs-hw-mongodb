@@ -5,8 +5,7 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  description:
-    This is a documentation of contacts app
+  description: This is a documentation of contacts app
 tags:
   - name: Contacts
     description: Operations about contacts.
@@ -15,7 +14,7 @@ tags:
 servers:
   - url: http://localhost:3000
     description: Local development server
-  - url: https://node-js-hw-mongodb-q3r7.onrender.com
+  - url: https://hw2-mongodb-u2zq.onrender.com/
     description: Production server
 paths:
   /contacts/{contactId}:

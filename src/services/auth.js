@@ -95,13 +95,16 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
 };
 
 export const requestResetToken = async (email) => {
+  console.log('JWT_SECRET:', process.env.JWT_SECRET);
   const user = await UsersCollection.findOne({ email });
   if (!user) {
     throw createHttpError(404, 'User not found');
   }
+  console.log('JWT_SECRET before sign:', process.env.JWT_SECRET);
+  console.log('Type of JWT_SECRET:', typeof process.env.JWT_SECRET);
   const resetToken = jwt.sign(
     {
-      sub: user._id,
+      sub: user._id.toString(),
       email,
     },
     process.env.JWT_SECRET,
@@ -115,7 +118,7 @@ export const requestResetToken = async (email) => {
   );
 
   const templateSource = (
-    await fs.readFile(resetPasswordTemplatePath)
+    await fs.readFile(resetPasswordTemplatePath, 'utf8')
   ).toString();
 
   const template = handlebars.compile(templateSource);
@@ -126,7 +129,7 @@ export const requestResetToken = async (email) => {
 
   try {
     await sendEmail({
-      from: process.env[SMTP.SMTP_FROM],
+      from: process.env.SMTP_FROM,
       to: email,
       subject: 'Reset your password',
       html,
